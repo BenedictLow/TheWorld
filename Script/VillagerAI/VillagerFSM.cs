@@ -43,7 +43,6 @@ public class VillagerFSM : MonoBehaviour {
 		if (changeState == State.Travel) 
 		{
 			CurrentState = TravelState;
-			Debug.Log ("Travelling...");
 		}
 	}
 }

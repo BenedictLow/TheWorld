@@ -2,9 +2,8 @@
 using System.Collections;
 
 public class Villager : MonoBehaviour {
-
+	public int speed;
 	private NavMeshAgent nav;
-	public float speed;
 	public Transform[] waypoints;
 	private int pointer = 0;
 	private int maxWaypoint;
