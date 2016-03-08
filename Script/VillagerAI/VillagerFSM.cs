@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class VillagerFSM : MonoBehaviour {
 
 	public ClassesStateBase TravelState = null;
-	public ClassesStateBase CurrentState = null;
+	public ClassesStateBase CurrentState;
 	private List<ClassesStateBase> m_States = new List<ClassesStateBase> ();
 	public enum State{Travel};
 
@@ -16,20 +16,15 @@ public class VillagerFSM : MonoBehaviour {
 	public float minWaypointDistance = 0.1f;
 
 	// Use this for initialization
-	void Awake () 
-	{
-		nav = GetComponent<NavMeshAgent> ();
-
-		maxWaypoint = waypoints.Length - 1;
-	}
-
-	// Use this for initialization
 	void Start () 
 	{
+		nav = GetComponent<NavMeshAgent> ();
+		maxWaypoint = waypoints.Length - 1;
+
 		m_States = new List<ClassesStateBase> ();
 		TravelState = new villagerTravel (this, State.Travel);
 		m_States.Add (TravelState);
-		CurrentState = TravelState;
+		ChangeState (State.Travel);
 	}
 	
 	// Update is called once per frame
@@ -44,5 +39,6 @@ public class VillagerFSM : MonoBehaviour {
 		{
 			CurrentState = TravelState;
 		}
+		CurrentState.Enter ();
 	}
 }

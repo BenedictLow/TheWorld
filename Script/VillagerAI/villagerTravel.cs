@@ -11,29 +11,28 @@ public class villagerTravel : ClassesStateBase {
 		m_VillagerFSM = fsm;
 		m_State = state;
 	}
-	public virtual void Enter()
+	public override void Enter()
 	{
 		m_speed = m_VillagerFSM.speed;
 		m_pointer = m_VillagerFSM.pointer;
 		m_maxWaypoint = m_VillagerFSM.maxWaypoint;
 	}
 
-	public virtual void Execute()
+	public override void Execute()
 	{
 		Travel ();
 	}
 
-	public virtual void FixedExecute()
+	public override void FixedExecute()
 	{
 	}
 
-	public virtual void End()
+	public override void End()
 	{}
 
 	void Travel()
 	{
-		Debug.Log ("Travelling...");
-		//m_VillageFSM.nav.speed = speed;
+		Debug.Log (m_speed);
 		m_VillagerFSM.nav.speed = m_speed;
 		Vector3 travelFrom;
 		Vector3 travelTo;
@@ -42,6 +41,7 @@ public class villagerTravel : ClassesStateBase {
 		travelFrom.y = 0.0f;
 
 		travelTo = m_VillagerFSM.waypoints [m_pointer].position;
+		Debug.Log (m_VillagerFSM.maxWaypoint);
 		if (Vector3.Distance (travelTo, travelFrom) < m_VillagerFSM.minWaypointDistance) 
 		{
 			if (m_pointer == m_maxWaypoint) {
@@ -52,7 +52,7 @@ public class villagerTravel : ClassesStateBase {
 				m_pointer++;
 			}
 		}
-
+		Debug.Log (m_pointer);
 		m_VillagerFSM.nav.SetDestination (travelTo);
 	}
 
