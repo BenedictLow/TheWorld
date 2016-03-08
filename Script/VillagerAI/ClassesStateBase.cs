@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ClassesStateBase : MonoBehaviour {
+public abstract class ClassesStateBase  {
 
 	public virtual void Enter()
 	{
