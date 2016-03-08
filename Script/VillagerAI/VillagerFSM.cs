@@ -29,11 +29,12 @@ public class VillagerFSM : MonoBehaviour {
 		m_States = new List<ClassesStateBase> ();
 		TravelState = new villagerTravel (this, State.Travel);
 		m_States.Add (TravelState);
-		ChangeState (State.Travel);
+		CurrentState = TravelState;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		CurrentState.Execute ();
 	}
 

@@ -3,6 +3,9 @@ using System.Collections;
 
 public class villagerTravel : ClassesStateBase {
 
+	private float m_speed;
+	private int m_pointer;
+	private int m_maxWaypoint;
 	public villagerTravel(VillagerFSM fsm, VillagerFSM.State state)
 	{
 		m_VillagerFSM = fsm;
@@ -10,6 +13,9 @@ public class villagerTravel : ClassesStateBase {
 	}
 	public virtual void Enter()
 	{
+		m_speed = m_VillagerFSM.speed;
+		m_pointer = m_VillagerFSM.pointer;
+		m_maxWaypoint = m_VillagerFSM.maxWaypoint;
 	}
 
 	public virtual void Execute()
@@ -26,23 +32,24 @@ public class villagerTravel : ClassesStateBase {
 
 	void Travel()
 	{
+		Debug.Log ("Travelling...");
 		//m_VillageFSM.nav.speed = speed;
-		m_VillagerFSM.nav.speed = m_VillagerFSM.speed;
+		m_VillagerFSM.nav.speed = m_speed;
 		Vector3 travelFrom;
 		Vector3 travelTo;
 
 		travelFrom = m_VillagerFSM.transform.position;
 		travelFrom.y = 0.0f;
 
-		travelTo = m_VillagerFSM.waypoints [m_VillagerFSM.pointer].position;
+		travelTo = m_VillagerFSM.waypoints [m_pointer].position;
 		if (Vector3.Distance (travelTo, travelFrom) < m_VillagerFSM.minWaypointDistance) 
 		{
-			if (m_VillagerFSM.pointer == m_VillagerFSM.maxWaypoint) {
-				m_VillagerFSM.pointer = 0;
+			if (m_pointer == m_maxWaypoint) {
+				m_pointer = 0;
 			} 
 			else
 			{
-				m_VillagerFSM.pointer++;
+				m_pointer++;
 			}
 		}
 
