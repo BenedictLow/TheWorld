@@ -5,6 +5,8 @@ public abstract class ClassesStateBase  {
 
 	protected VillagerFSM m_VillagerFSM = null;
 	protected VillagerFSM.State m_State;
+	protected AIPerception m_AIPerception = null;
+	protected AIMovement m_AIMovement = null;
 	public virtual void Enter()
 	{
 	}

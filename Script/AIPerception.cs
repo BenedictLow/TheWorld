@@ -137,7 +137,7 @@ public class AIPerception : MonoBehaviour {
 			foreach (Collider DetectedObject in DetectedObjects)
 			{
 				//check to ensure that the gameobject is not the agent itself or the ocean
-				if(DetectedObject.gameObject != gameObject && DetectedObject.tag != "Ocean")
+				if(DetectedObject.gameObject != gameObject && DetectedObject.tag != "Land")
 				{
 					//detected gameobject can be heard by the agent and is added to the list
 					GameObjectList.Add (DetectedObject.gameObject);

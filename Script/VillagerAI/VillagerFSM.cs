@@ -15,10 +15,14 @@ public class VillagerFSM : MonoBehaviour {
 	public int maxWaypoint;
 	public float minWaypointDistance = 0.1f;
 
+	[HideInInspector] public AIPerception m_Perception = null;
+	[HideInInspector] public AIMovement m_Movement = null;
 	// Use this for initialization
 	void Start () 
 	{
 		nav = GetComponent<NavMeshAgent> ();
+		m_Perception = GetComponent<AIPerception> ();
+		m_Movement = GetComponent<AIMovement> ();
 		maxWaypoint = waypoints.Length - 1;
 
 		m_States = new List<ClassesStateBase> ();

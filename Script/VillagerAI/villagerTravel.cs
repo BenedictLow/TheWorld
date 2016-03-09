@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class villagerTravel : ClassesStateBase {
 
@@ -10,7 +11,10 @@ public class villagerTravel : ClassesStateBase {
 	{
 		m_VillagerFSM = fsm;
 		m_State = state;
+		m_AIPerception = fsm.m_Perception;
+		m_AIMovement = fsm.m_Movement;
 	}
+
 	public override void Enter()
 	{
 		m_speed = m_VillagerFSM.speed;
@@ -21,11 +25,16 @@ public class villagerTravel : ClassesStateBase {
 
 	public override void Execute()
 	{
+		if (m_VillagerFSM.nav.isActiveAndEnabled == false)
+			m_VillagerFSM.nav.enabled = true;
+
+		CheckSurr ();
 		Travel ();
 	}
 
 	public override void FixedExecute()
 	{
+		
 	}
 
 	public override void End()
@@ -72,4 +81,8 @@ public class villagerTravel : ClassesStateBase {
 		Debug.Log (m_pointer);
 	}
 
+	void CheckSurr()
+	{
+		List<GameObject> DetectedObjects = m_AIPerception.CheckPerception ();
+	}
 }
