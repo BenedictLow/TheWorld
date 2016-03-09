@@ -48,7 +48,6 @@ public class villagerTravel : ClassesStateBase {
 		travelFrom.y = 0.0f;
 
 		travelTo = m_VillagerFSM.waypoints [m_pointer].position;
-		Debug.Log (m_VillagerFSM.maxWaypoint);
 		if (Vector3.Distance (travelTo, travelFrom) < m_VillagerFSM.minWaypointDistance) 
 		{
 			if (m_pointer == m_maxWaypoint) {
@@ -59,7 +58,6 @@ public class villagerTravel : ClassesStateBase {
 				m_pointer++;
 			}
 		}
-		Debug.Log (m_pointer);
 	}
 
 	void CheckNearestSafeZone()

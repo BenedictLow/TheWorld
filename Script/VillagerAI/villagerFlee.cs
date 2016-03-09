@@ -1,15 +1,38 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class villagerFlee : MonoBehaviour {
+public class villagerFlee : ClassesStateBase {
 
-	// Use this for initialization
-	void Start () {
-	
+	public villagerFlee(VillagerFSM fsm, VillagerFSM.State state)
+	{
+		m_VillagerFSM = fsm;
+		m_State = state;
+		m_AIPerception = fsm.m_Perception;
+		m_AIMovement = fsm.m_Movement;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public override void Enter()
+	{
+		
+	}
+
+	public override void Execute()
+	{
+		
+	}
+
+	public override void FixedExecute()
+	{
+		
+	}
+
+	public override void End()
+	{
+		
+	}
+	void CheckSurr()
+	{
+		List<GameObject> DetectedObjects = m_AIPerception.CheckPerception ();
 	}
 }
