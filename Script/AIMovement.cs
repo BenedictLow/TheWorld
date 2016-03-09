@@ -235,7 +235,7 @@ public class AIMovement : MonoBehaviour {
 				bool bIgnoreIsland = ((DetectedObstacle.collider.tag == "Island" || DetectedObstacle.collider.tag == "SmallIsland" || DetectedObstacle.collider.tag == "PirateIsland") && _bIgnoreIslands == true);
 
 				//check to make sure that detected object is not the agent gameobject
-				if(DetectedObstacle.collider.gameObject != gameObject && DetectedObstacle.collider.tag != "Ocean" && bIgnoreNeighbour == false && bIgnoreIsland == false)
+				if(DetectedObstacle.collider.gameObject != gameObject && DetectedObstacle.collider.tag != "Land" && bIgnoreNeighbour == false && bIgnoreIsland == false)
 				{
 					//if the closest intersection point is null, set it to the current one
 					if(ClosestIntersection.collider == null)

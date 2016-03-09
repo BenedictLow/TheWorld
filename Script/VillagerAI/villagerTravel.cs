@@ -25,25 +25,22 @@ public class villagerTravel : ClassesStateBase {
 
 	public override void Execute()
 	{
-		if (m_VillagerFSM.nav.isActiveAndEnabled == false)
-			m_VillagerFSM.nav.enabled = true;
-
 		CheckSurr ();
-		Travel ();
 	}
 
 	public override void FixedExecute()
 	{
-		
+		DecideTravelDestination ();
+		int travelStatus = TravelToArea (m_VillagerFSM.waypoints [m_pointer].position);
 	}
 
 	public override void End()
-	{}
-
-	void Travel()
 	{
-		Debug.Log (m_speed);
-		m_VillagerFSM.nav.speed = m_speed;
+		
+	}
+
+	void DecideTravelDestination()
+	{
 		Vector3 travelFrom;
 		Vector3 travelTo;
 
@@ -63,7 +60,6 @@ public class villagerTravel : ClassesStateBase {
 			}
 		}
 		Debug.Log (m_pointer);
-		m_VillagerFSM.nav.SetDestination (travelTo);
 	}
 
 	void CheckNearestSafeZone()
@@ -84,5 +80,10 @@ public class villagerTravel : ClassesStateBase {
 	void CheckSurr()
 	{
 		List<GameObject> DetectedObjects = m_AIPerception.CheckPerception ();
+	}
+
+	private int TravelToArea(Vector3 TargetPos)
+	{
+		return m_AIMovement.NavigateToPos (TargetPos);
 	}
 }
