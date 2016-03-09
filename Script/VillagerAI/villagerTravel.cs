@@ -16,6 +16,7 @@ public class villagerTravel : ClassesStateBase {
 		m_speed = m_VillagerFSM.speed;
 		m_pointer = m_VillagerFSM.pointer;
 		m_maxWaypoint = m_VillagerFSM.maxWaypoint;
+		CheckNearestSafeZone ();
 	}
 
 	public override void Execute()
@@ -54,6 +55,21 @@ public class villagerTravel : ClassesStateBase {
 		}
 		Debug.Log (m_pointer);
 		m_VillagerFSM.nav.SetDestination (travelTo);
+	}
+
+	void CheckNearestSafeZone()
+	{
+		int nearest = 0;
+		for (int i = 0; i < m_VillagerFSM.waypoints.Length; i++) 
+		{
+			if (Vector3.Distance (m_VillagerFSM.transform.position, m_VillagerFSM.waypoints [nearest].position) 
+				> Vector3.Distance (m_VillagerFSM.transform.position, m_VillagerFSM.waypoints [i].position)) 
+			{
+				nearest = i;
+			}
+		}
+		m_pointer = nearest;
+		Debug.Log (m_pointer);
 	}
 
 }

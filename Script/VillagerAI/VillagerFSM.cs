@@ -26,7 +26,14 @@ public class VillagerFSM : MonoBehaviour {
 		m_States.Add (TravelState);
 		ChangeState (State.Travel);
 	}
-	
+
+	//for physics and stuff like that
+	void FixedUpdate()
+	{
+		CurrentState.FixedExecute ();
+	}
+
+
 	// Update is called once per frame
 	void Update () 
 	{
