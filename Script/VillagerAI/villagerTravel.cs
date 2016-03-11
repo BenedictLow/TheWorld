@@ -78,6 +78,13 @@ public class villagerTravel : ClassesStateBase {
 	void CheckSurr()
 	{
 		List<GameObject> DetectedObjects = m_AIPerception.CheckPerception ();
+		foreach (GameObject Detected in DetectedObjects) 
+		{
+			if (Detected.tag == "Monster") 
+			{
+				m_VillagerFSM.ChangeState (VillagerFSM.State.Flee);
+			}
+		}
 	}
 
 	private int TravelToArea(Vector3 TargetPos)

@@ -4,9 +4,10 @@ using System.Collections.Generic;
 public class VillagerFSM : MonoBehaviour {
 
 	public ClassesStateBase TravelState = null;
+	public ClassesStateBase villagerFleeState = null;
 	public ClassesStateBase CurrentState;
 	private List<ClassesStateBase> m_States = new List<ClassesStateBase> ();
-	public enum State{Travel};
+	public enum State{Travel, Flee};
 
 	public float speed;
 	public Transform[] waypoints;
@@ -25,6 +26,7 @@ public class VillagerFSM : MonoBehaviour {
 
 		m_States = new List<ClassesStateBase> ();
 		TravelState = new villagerTravel (this, State.Travel);
+		villagerFleeState = new villagerFlee (this, State.Flee);
 		m_States.Add (TravelState);
 		ChangeState (State.Travel);
 	}
@@ -44,9 +46,12 @@ public class VillagerFSM : MonoBehaviour {
 
 	public void ChangeState(State changeState)
 	{
-		if (changeState == State.Travel) 
-		{
+		if (changeState == State.Travel) {
 			CurrentState = TravelState;
+		}
+		else if (changeState == State.Flee) 
+		{
+			CurrentState = villagerFleeState;
 		}
 		CurrentState.Enter ();
 	}
